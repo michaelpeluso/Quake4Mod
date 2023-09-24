@@ -128,6 +128,7 @@ stateResult_t idAI::State_WakeUp ( const stateParms_t& parms ) {
 	
 	WakeUp ( );
 
+
 	// Start immeidately into a playback?
 	if( spawnArgs.FindKey( "playback_intro" ) ){
 		ScriptedPlaybackMove ( "playback_intro", PBFL_GET_POSITION | PBFL_GET_ANGLES_FROM_VEL, 0 );
