@@ -427,9 +427,47 @@ stateResult_t rvWeaponBlaster::State_Fire ( const stateParms_t& parms ) {
 
 	
 			if ( gameLocal.time - fireHeldTime > chargeTime ) {	
-				Attack ( true, 1, spread, 0, 1.0f );
-				PlayEffect ( "fx_chargedflash", barrelJointView, false );
-				PlayAnim( ANIMCHANNEL_ALL, "chargedfire", parms.blendFrames );
+				//Attack ( true, 1, spread, 0, 1.0f );
+				//PlayEffect ( "fx_chargedflash", barrelJointView, false );
+				//PlayAnim( ANIMCHANNEL_ALL, "chargedfire", parms.blendFrames );
+				
+				//////////////
+				// spawn object 
+				const char* key, * value;
+				int			i;
+				float		yaw;
+				idVec3		org;
+				idDict		dict;
+
+				yaw = gameLocal.GetLocalPlayer()->viewAngles.yaw;
+
+				value = "monster_strogg_marine";
+				dict.Set("classname", value);
+				dict.Set("angle", va("%f", yaw + 180));
+
+				org = gameLocal.GetLocalPlayer()->GetPhysics()->GetOrigin() + idAngles(0, yaw, 0).ToForward() * 80 + idVec3(0, 0, 1);
+				dict.Set("origin", org.ToString());
+
+				
+				key = "spawn";
+				value = "monster_strogg_marine";
+
+				dict.Set(key, value);
+
+				// RAVEN BEGIN
+				// kfuller: want to know the name of the entity I spawned
+				idEntity* newEnt = NULL;
+				gameLocal.SpawnEntityDef(dict, &newEnt);
+
+				if (newEnt) {
+					gameLocal.Printf("spawned entity '%s'\n", newEnt->name.c_str());
+				}
+				else {
+					gameLocal.Printf("spawn error\n");
+				}
+				// RAVEN END
+				////////////////
+
 			} else {
 				Attack ( false, 200, 10, 0, 1.0f ); ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				PlayEffect ( "fx_normalflash", barrelJointView, false );

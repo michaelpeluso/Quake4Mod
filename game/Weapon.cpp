@@ -237,6 +237,8 @@ rvViewWeapon::SetModel
 void rvViewWeapon::SetModel( const char *modelname, int mods ) {
 	assert( modelname );
 
+	//gameLocal.Printf( modelname ); ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	if ( modelDefHandle >= 0 ) {
 		gameRenderWorld->RemoveDecals( modelDefHandle );
 	}
