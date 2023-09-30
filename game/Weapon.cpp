@@ -2504,7 +2504,7 @@ void rvWeapon::AddToClip ( int amount ) {
 rvWeapon::Attack
 ================
 */
-void rvWeapon::Attack( bool altAttack, int num_attacks, float spread, float fuseOffset, float power ) {
+void rvWeapon::Attack( bool altAttack, int num_attacks, float spread, float fuseOffset, float power, bool mele = false ) {
 	idVec3 muzzleOrigin;
 	idMat3 muzzleAxis;
 	
