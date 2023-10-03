@@ -21,7 +21,7 @@ def process_map_file(input_file, output_file):
             if inside_object and 'classname' in line:
                 # Extracting the classname value
                 match = re.search(r'"classname"\s+"([^"]+)"', line)
-                if match and match.group(1) in WORDLIST:
+                if match and any(word in match.group(1) for word in WORDLIST):
                     # Commenting out the line
                     f.write(line)
                     comment_lines = True
